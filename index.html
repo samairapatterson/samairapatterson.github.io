@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samaira — Videographer & Editor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0A0A0A;
+      --yellow: #F5C800;
+      --white: #F0EFEA;
+      --grey: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 48px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(245,200,0,0.08);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.12em;
+      color: var(--yellow);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--grey);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--yellow); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 48px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(120px, 22vw, 320px);
+      color: rgba(245,200,0,0.04);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 18px;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 14vw, 200px);
+      line-height: 0.9;
+      letter-spacing: 0.03em;
+      color: var(--white);
+    }
+
+
+
+    .hero-name { color: var(--white); }
+    .hero-name span { color: var(--yellow); }
+
+    .hero-line {
+      margin-top: 28px;
+      font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+      color: var(--grey);
+      max-width: 480px;
+      letter-spacing: 0.01em;
+      border-left: 2px solid var(--yellow);
+      padding-left: 16px;
+    }
+
+    .hero-cta {
+      margin-top: 44px;
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      transition: background 0.2s, transform 0.2s;
+      width: fit-content;
+    }
+
+    .hero-cta:hover { background: #ffe033; transform: translateY(-2px); }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 48px; }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .section-label::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 60px;
+      background: var(--yellow);
+      opacity: 0.4;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px;
+    }
+
+    .project-card {
+      background: #111;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 2px;
+      width: 0;
+      background: var(--yellow);
+      transition: width 0.35s ease;
+      z-index: 1;
+    }
+
+    .project-card:hover { background: #161616; }
+    .project-card:hover::before { width: 100%; }
+
+    .project-video {
+      width: 100%;
+      aspect-ratio: 16/9;
+      display: block;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .project-info {
+      padding: 28px 32px 32px;
+    }
+
+    .project-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: rgba(245,200,0,0.12);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .project-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .project-tag {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      border: 1px solid rgba(245,200,0,0.3);
+      padding: 4px 10px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2px;
+    }
+
+    .contact-card {
+      background: #111;
+      padding: 32px 28px;
+      transition: background 0.2s;
+    }
+
+    .contact-card:hover { background: #161616; }
+
+    .contact-card a {
+      text-decoration: none;
+      display: block;
+    }
+
+    .contact-type {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 10px;
+    }
+
+    .contact-value {
+      font-size: 0.95rem;
+      color: var(--white);
+      word-break: break-all;
+      transition: color 0.2s;
+    }
+
+    .contact-card:hover .contact-value { color: var(--yellow); }
+
+    /* ── INTERNSHIP ── */
+    .internship-section {
+      background: #0d0d0d;
+      border-top: 1px solid rgba(245,200,0,0.08);
+    }
+
+    .internship-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .internship-text h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: 0.04em;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .internship-text p {
+      margin-top: 10px;
+      font-size: 0.88rem;
+      color: var(--grey);
+    }
+
+    .btn-internship {
+      display: inline-block;
+      background: transparent;
+      color: var(--yellow);
+      border: 1.5px solid var(--yellow);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-internship:hover {
+      background: var(--yellow);
+      color: var(--black);
+      transform: translateY(-2px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid rgba(245,200,0,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer p {
+      font-size: 0.75rem;
+      color: #444;
+    }
+
+    footer span { color: var(--yellow); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 18px 24px; }
+      .nav-links { gap: 20px; }
+      .hero { padding: 0 24px 56px; }
+      section { padding: 72px 24px; }
+      .internship-inner { flex-direction: column; }
+      footer { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Samaira</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-text" aria-hidden="true">SAMAIRA</div>
+    <p class="hero-eyebrow">Videographer &amp; Editor</p>
+    <h1 class="hero-name"><span>SAM</span>AIRA</h1>
+    <p class="hero-line">Creating cinematic visuals through storytelling and editing.</p>
+    <a href="#projects" class="hero-cta">View My Work</a>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Projects</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <video class="project-video" controls preload="metadata">
+          <source src="flash.mp4" type="video/mp4" />
+        </video>
+        <div class="project-info">
+          <div class="project-num">01</div>
+          <h3 class="project-title">Transition</h3>
+          <span class="project-tag">Transitions</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <video class="project-video" controls preload="metadata">
+          <source src="Sequence_01_11.mp4" type="video/mp4" />
+        </video>
+        <div class="project-info">
+          <div class="project-num">02</div>
+          <h3 class="project-title">Editing</h3>
+          <span class="project-tag">Editing</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <video class="project-video" controls preload="metadata">
+          <source src="kinda_final.mp4" type="video/mp4" />
+        </video>
+        <div class="project-info">
+          <div class="project-num">03</div>
+          <h3 class="project-title">Short Film</h3>
+          <span class="project-tag">Short Film</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <div class="contact-grid">
+
+      <div class="contact-card">
+        <p class="contact-type">Phone</p>
+        <a href="tel:+919741547125">
+          <p class="contact-value">+91 97415 47125</p>
+        </a>
+      </div>
+
+      <div class="contact-card">
+        <p class="contact-type">Email</p>
+        <a href="mailto:samaira.patterson256@gmail.com">
+          <p class="contact-value">samaira.patterson256@gmail.com</p>
+        </a>
+      </div>
+
+      <div class="contact-card">
+        <p class="contact-type">Instagram</p>
+        <a href="https://instagram.com/samaira_p__" target="_blank" rel="noopener">
+          <p class="contact-value">@samaira_p__</p>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 <span>Samaira</span>. All rights reserved.</p>
+    <p>Videographer &amp; Editor</p>
+  </footer>
+
+</body>
+</html>
